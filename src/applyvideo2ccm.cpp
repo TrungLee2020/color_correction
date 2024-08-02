@@ -10,7 +10,7 @@ using namespace std;
 namespace fs = std::filesystem;
 
 cv::Mat readColorCorrectionMatrix(const std::string& filename) {
-    std::fstream CMC(filename, std::ios::in);
+    std::ifstream CMC(filename, std::ios::in);
     
     if (!CMC) {
         std::cerr << "Error opening the file: " << filename << std::endl;
@@ -63,8 +63,8 @@ cv::Mat applyColorCorrection(const cv::Mat& img, const cv::Mat& ColorMatrix, dou
             DP[j+2] = cv::saturate_cast<uchar>(SP[j+2] * (1.0 - enhancement) + r * enhancement);
         }
     }
-    double alpha = 0.95; // Điều chỉnh giá trị này để thay đổi độ sáng (< 1.0 để giảm, > 1.0 để tăng)
-    Dst.convertTo(Dst, -1, alpha, 0);
+    // double alpha = 0.95; // Điều chỉnh giá trị này để thay đổi độ sáng (< 1.0 để giảm, > 1.0 để tăng)
+    // Dst.convertTo(Dst, -1, alpha, 0);
     return Dst;
 }
 
@@ -98,14 +98,14 @@ void processVideo(const std::string& inputVideo, const std::string& outputVideo,
 }
 int main() {
     auto start = std::chrono::high_resolution_clock::now();
-
-    std::string inputVideo = "result_hsl_video/am_vang/28.mp4";
-    std::string outputVideo = "result_hsl_ccm/am_vang/28.mp4";
+    std::cout << "Start processing apply CCM to video." << std::endl;
+    std::string inputVideo = "original_videos/vach_ke_duong/41_.mp4";
+    std::string outputVideo = "result_ccm_video/vach_ke_duong/41_.mp4";
     std::string cmcFile = "ref/LCC_CMC.csv";
 
     processVideo(inputVideo, outputVideo, cmcFile);
 
-    std::cout << "Video processing completed." << std::endl;
+    std::cout << "Video processing apply CCM to video completed." << std::endl;
 
     auto end = std::chrono::high_resolution_clock::now();
     auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(end - start);

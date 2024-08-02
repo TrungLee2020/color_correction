@@ -1,0 +1,9 @@
+                        H   S   L
+vach ke duong:  vang:    0, -50, 30
+                xanh la: 25, 30, 0
+
+am vang                 0, -40, 30
+                        25, 60, 0
+
+anh_nguoc_nang
+

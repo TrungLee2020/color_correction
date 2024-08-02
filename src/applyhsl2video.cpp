@@ -37,8 +37,8 @@ void process_video(const std::string& input_path, const std::string& output_path
 
 
 int main() {
-    std::string input_path = "original_videos/am_vang/28.mp4";
-    std::string output_path = "result_hsl_video/am_vang/28.mp4";
+    std::string input_path = "original_videos/vach_ke_duong/95.mp4";
+    std::string output_path = "result_hsl_video/vach_ke_duong/95.mp4";
 
     auto start = std::chrono::high_resolution_clock::now();
     std::cout << "Processing video: " << input_path << std::endl;
@@ -56,8 +56,8 @@ int main() {
 
     cv::Mat frame;
     while (cap.read(frame)) {
-        cv::Mat adjusted_yello2frame = adjust_hsl_yellow_frame(frame, 0, -40, 30);
-        cv::Mat adjusted_frame = adjust_hsl_green_frame(adjusted_yello2frame, 20, 40, -5);
+        cv::Mat adjusted_yello2frame = adjust_hsl_yellow_frame(frame, 0, -50, 30);
+        cv::Mat adjusted_frame = adjust_hsl_green_frame(adjusted_yello2frame, 25, 30, 0);
         writer.write(adjusted_frame);
     }
 
